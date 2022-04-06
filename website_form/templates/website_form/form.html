@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Scraper with VA</title>
+</head>
+<body>
+<form method="POST" role="form" action="">
+    {% csrf_token %}
+    <button type="submit" name="voice_assistant">
+        <strong>USE VOICE ASSISTANT</strong>
+    </button>
+</form>
+<br>
+<a href="{{ '/results' }}" style="text-decoration: none">
+    <button type="button">
+        CURRENT RESULTS
+    </button>
+</a>
+<hr>
+<form method="POST" role="form" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <hr>
+    <input type="submit" value="Search" name="search">
+</form>
+</body>
+</html>

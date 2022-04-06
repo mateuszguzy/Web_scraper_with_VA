@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+  <style>
+    ul.errorlist {
+    display:none
+    }
+
+    a {
+    text-decoration: none;
+    color: black
+    }
+
+    tr {
+    text-align: center
+    }
+  </style>
+</head>
+<body>
+<div>
+  <a href="{{ '/' }}">
+    <button type="button">
+      BACK TO SEARCH FORM
+    </button>
+  </a>
+    <br><hr>
+  <form action="" method="POST" role="form" class="errorlist">
+    {% csrf_token %}
+    FILTER BY:
+    {{ filter_form.as_p }}
+    <input type="submit" value="Apply" name="apply_filters">
+  </form>
+  <br>
+</div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>Picture</th>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Date In</th>
+      <th>Date Out</th>
+      <th>Max Guests</th>
+      <th>Price
+        <form action="" method="POST" role="form">{% csrf_token %}
+          {{ currency_change_form.as_p }}
+          <input type="submit" value="Change Currency" name="change_currency">
+        </form>
+      </th>
+      <th>Offer Link</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for offer in data %}
+    <tr>
+      <td>
+        <img src="{{ offer.picture }}" width="300"/>
+      </td>
+      <td width="150">{{ offer.title }}</td>
+      <td width="100">{{ offer.location }}</td>
+      <td>{{ offer.date_in }}</td>
+      <td>{{ offer.date_out }}</td>
+      <td>{{ offer.max_guests }}</td>
+      <td width="100">
+        {% if currency == "USD" %}
+          $ {{ offer.price }}
+        {% else %}
+          {{ offer.converted_price }} {{ currency }}
+        {% endif %}
+      </td>
+      <td>
+        <a href="{{ offer.link }}" target="_blank">
+          <button type="button">Link to offer</button>
+        </a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>
