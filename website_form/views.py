@@ -264,7 +264,6 @@ def exchange_currency(currency_type):
         offer.save()
 
 
-# ------ DISABLED DUE TO INABILITY TO WORK ON HOSTING SITE
 def voice_assistant():
     """Allows to remotely fill the form present on website. Ask questions covering all the fields
     present in online form, and starts data scraping function."""
